@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>AweFloor</title>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="wrap" id="page_all">
+    <!-- 隐藏预下载占位图 -->
+    <img id="loading_gif" src="images/loading.gif" class="loading_gif" style="display:block; margin-left:auto;margin-right: auto;margin-top: 200px;" />
+    <img src="upload/images/other/load_full.jpg" style="display:none;" />
+    <img src="upload/images/other/load_half.jpg" style="display:none;" />
+</div>
+<!-------------------所有模板 --------------------->
+    <!-- 楼层模板1 整张大图 -->
+    <script id="floor_tpl_1" type="text/html">
+        <!-- 楼层 {{floor_id}} -->
+        <div class="shopFloor">
+        {{#content}}
+            <a href="{{link}}">
+                <img src="upload/images/other/load_full.jpg" data-original="{{img}}" class="lazy full_img" />
+                <b>{{desc}}</b>
+            </a>
+        {{/content}}
+        </div>
+    </script>
+    <!-- 楼层模板2 左1右2 -->
+    <script id="floor_tpl_2" type="text/html">
+        <!-- 楼层 {{floor_id}} -->
+        <div class="shopFloor clearfloat">
+        {{#content}}
+            <div class="half_width left align_c">
+                <a href="{{left_link}}">
+                    <img data-original="{{left_img}}" src="upload/images/other/load_half.jpg" class="lazy half_img tm10" />
+                    <b>{{left_desc}}</b>
+                </a>
+            </div>
+            <div class="half_width right">
+                <ul class="item">
+                    <li class="item_list clearfloat">
+                        <a href="{{right_top_link}}">
+                            <span class="half_width left">{{right_top_text}}</span>
+                            <span class="half_width right" ><img class="lazy" data-original="{{right_top_img}}" src="upload/images/other/load_half.jpg" /></span>
+                        </a>
+                    </li>
+                    <li class="item_list clearfloat">
+                        <a href="{{right_bottom_link}}">
+                            <span class="lazy half_width left">{{right_bottom_text}}</span>
+                            <span class="lazy half_width right"><img class="lazy" data-original="{{right_bottom_img}}" src="upload/images/other/load_half.jpg" /></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {{/content}}
+        </div>
+    </script>
+    <!-- 楼层模板3 左2右1 -->
+    <script id="floor_tpl_3" type="text/html">
+        <!-- 楼层 {{floor_id}} -->
+    	<div class="shopFloor clearfloat">
+        {{#content}}
+			<div class="half_width right align_c">
+				<a href="{{right_link}}">
+					<img data-original="{{right_img}}" src="upload/images/other/load_half.jpg" class="lazy half_img tm10"/>
+					<b>{{right_desc}}</b>
+				</a>
+			</div>
+			<div class="half_width left">
+				<ul class="item">
+					<li class="item_list clearfloat">
+						<a href="{{left_top_link}}">
+							<span class="half_width right">{{left_top_text}}</span>
+							<span class="half_width left" ><img class="lazy" data-original="{{left_top_img}}" src="upload/images/other/load_half.jpg" /></span>
+						</a>
+					</li>
+					<li class="item_list clearfloat">
+						<a href="{{left_bottom_link}}">
+							<span class="half_width right">{{left_bottom_text}}</span>
+							<span class="half_width left" ><img class="lazy" data-original="{{left_bottom_img}}" src="upload/images/other/load_half.jpg" /></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+        {{/content}}
+		</div>
+    </script>
+    <!-- 楼层模板4 左1右4 -->
+    <script id="floor_tpl_4" type="text/html">
+        <!-- 楼层 {{floor_id}} -->
+        <div class="shopFloor clearfloat">
+        {{#content}}
+            <div class="half_width left align_c">
+                <a href="{{left_link}}">
+                    <img data-original="{{left_img}}" src="upload/images/other/load_half.jpg" class="lazy half_img tm10" />
+                    <b>{{left_desc}}</b>
+                </a>
+            </div>
+            <div class="half_width right vertical_line">
+                <ul class="item">
+                    <li class="item_list clearfloat">
+                        <a href="{{right_top_1_link}}">
+                            <span class="half_width left">
+                                <img data-original="{{right_top_1_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{right_top_1_desc}}</b>
+                            </span>
+                        </a>
+                        <a href="{{right_top_2_link}}">
+                            <span class="half_width right">
+                                <img data-original="{{right_top_2_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{right_top_2_desc}}</b>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="item_list clearfloat">
+                        <a href="{{right_bottom_1_link}}">
+                            <span class="half_width left">
+                                <img data-original="{{right_bottom_1_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{right_bottom_1_desc}}</b>
+                            </span>
+                        </a>
+                        <a href="{{right_bottom_2_link}}">
+                            <span class="half_width right">
+                                <img data-original="{{right_bottom_2_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{right_bottom_2_desc}}</b>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {{/content}}
+        </div>
+    </script>
+    <!-- 楼层模板5 左4右1 -->
+    <script id="floor_tpl_5" type="text/html">
+        <!-- 楼层 {{floor_id}} -->
+        <div class="shopFloor clearfloat">
+        {{#content}}
+            <div class="half_width right align_c">
+                <a href="{{right_link}}">
+                    <img data-original="{{right_img}}" src="upload/images/other/load_half.jpg" class="lazy half_img tm10" />
+                    <b>{{right_desc}}</b>
+                </a>
+            </div>
+            <div class="half_width left vertical_line">
+                <ul class="item">
+                    <li class="item_list clearfloat">
+                        <a href="{{left_top_1_link}}">
+                            <span class="half_width left">
+                                <img data-original="{{left_top_1_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{left_top_1_desc}}</b>
+                            </span>
+                        </a>
+                        <a href="{{left_top_2_link}}">
+                            <span class="half_width right">
+                                <img data-original="{{left_top_2_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{left_top_2_desc}}</b>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="item_list clearfloat">
+                        <a href="{{left_bottom_1_link}}">
+                            <span class="half_width left">
+                                <img data-original="{{left_bottom_1_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{left_bottom_1_desc}}</b>
+                            </span>
+                        </a>
+                        <a href="{{left_bottom_2_link}}">
+                            <span class="half_width right">
+                                <img data-original="{{left_bottom_2_img}}" src="upload/images/other/load_half.jpg" class="lazy" />
+                                <b>{{left_bottom_2_desc}}</b>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {{/content}}
+        </div>
+    </script>
+	<!-- 所有楼层结束 -->
+	<!--BRAND专区-->
+    <script id="brand_tpl" type="text/html">
+	<div class="channelBlock">
+		<h3>品牌专区</h3>
+		<ul class="three_block clearfloat">
+			<li><a href="{{top1_link}}">
+                <img class="lazy" data-original="{{top1_img}}" src="upload/images/other/load_full.jpg" />
+                <b>{{top1_desc}}</b>
+            </a></li>
+			<li>
+                <a href="{{top2_link}}"><img class="lazy" data-original="{{top2_img}}" src="upload/images/other/load_full.jpg" />
+                <b>{{top2_desc}}</b>
+            </a></li>
+			<li><a href="{{top3_link}}">
+                <img class="lazy" data-original="{{top3_img}}" src="upload/images/other/load_full.jpg" />
+                <b>{{top3_desc}}</b>
+            </a></li>
+		</ul>
+		<ul class="four_block clearfloat">
+			<li><a href="{{bottom1_link}}">
+                <img class="lazy" data-original="{{bottom1_img}}" src="upload/images/other/load_half.jpg" />
+                <b>{{bottom1_desc}}</b>
+            </a></li>
+			<li><a href="{{bottom2_link}}">
+                <img class="lazy" data-original="{{bottom2_img}}" src="upload/images/other/load_half.jpg" />
+                <b>{{bottom2_desc}}</b>
+            </a></li>
+			<li><a href="{{bottom3_link}}">
+                <img class="lazy" data-original="{{bottom3_img}}" src="upload/images/other/load_half.jpg" />
+                <b>{{bottom3_desc}}</b>
+            </a></li>
+			<li><a href="{{bottom4_link}}">
+                <img class="lazy" data-original="{{bottom4_img}}" src="upload/images/other/load_half.jpg" />
+                <b>{{bottom4_desc}}</b>
+            </a></li>
+		</ul>
+	</div>
+    </script>
+<!-- -----------------所有模板 ------------------- -->
+<script src="js/lazyload.min.js"></script>
+<script>
+function jq_lazyload(){
+    $("div#page_all img.lazy").lazyload({threshold:300, load : function(e){$(this).next('b').hide();$(this).removeClass('lazy');}});
+    $(window).trigger("scroll");
+}
+
+function loadComplete(){
+    $('body').flowtype({
+        fontRatio : 25,
+        lineRatio : 1.5
+    });
+
+    function request(paras)//获取当前页面的参数
+    { 
+        var url = location.href; 
+        var paraString = url.substring(url.indexOf("?")+1,url.length).split("&"); 
+        var paraObj = {} 
+        for (i=0; j=paraString[i]; i++){ 
+        paraObj[j.substring(0,j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=")+1,j.length); 
+        } 
+        var returnValue = paraObj[paras.toLowerCase()]; 
+        if(typeof(returnValue)=="undefined"){ 
+        return ""; 
+        }else{ 
+        return returnValue; 
+        } 
+    }
+
+    //如果用localstorage则先lazyload img
+    if(window.localStorage){
+        if(localStorage.getItem('dom_all')){
+            jq_lazyload();
+        }
+    }
+
+    //var server_url='../index.php?act=mobile&op=getHomePageCFG';
+    if(request("mod")=='cfg'){
+        server_url=server_url+'&mod=cfg';
+    }
+
+    //图片载入时隐藏描述文字
+    $.ajax({
+        url:'js/floor_params.json',
+        //url:server_url,
+		dataType:"json",
+		type:"GET",
+        success:function(json){
+        	var dom_all="";
+			for(var i=0; i<json.floors.length; i++){
+                var style_this = json.floors[i].style;
+                dom_all+=Mustache.render($('#floor_tpl_'+style_this).html(), json.floors[i]);
+            }
+            dom_all+=Mustache.render($('#brand_tpl').html(),json.brands);
+            if(!window.localStorage || !localStorage.getItem('dom_all')){
+                document.getElementById("page_all").innerHTML = dom_all;
+                jq_lazyload();
+                $('body').addClass('body_bg');
+            }
+            localStorage.setItem('dom_all',encodeURIComponent(dom_all));
+            dom_all=null; //释放内存
+        }
+   });
+}
+
+//针对Android webview渲染js慢的问题，延时加载
+function loadscript(){
+    if(window.localStorage){
+        if(localStorage.getItem('dom_all')){
+            document.getElementById("page_all").innerHTML = decodeURIComponent(localStorage.getItem('dom_all'));
+            document.body.className = "body_bg";
+        }
+    }
+    LazyLoad.js([
+        'js/zepto.min.js', 
+        'js/jquery.lazyload.min.js',  
+        'js/mustache.js',
+        'js/flowtype.js'
+    ], loadComplete);
+}
+
+setTimeout(loadscript,10);
+
+//处理Webview未lazyload完，进入其它页面，js中止，返回不执行
+window.ontouchstart = function(e){
+    jq_lazyload();
+} 
+</script>
+</body>
+</html>
