@@ -3,10 +3,10 @@
 </IfModule>
 
 <IfModule mod_headers.c>
-    <FilesMatch "\\.(ico|jpe?g|bmp|png|gif|swf|css|js|html|json)$">
+    <FilesMatch "\\.(ico|jpe?g|bmp|png|gif|swf|css|js|json)$">
         Header set Cache-Control "max-age=2692000, public"
     </FilesMatch>
-    <FilesMatch "\\.(php)$">
+    <FilesMatch "\\.(php|html)$">
         Header set Cache-Control "max-age=600, private, must-revalidate"
     </FilesMatch>
     Header unset ETag
