@@ -24,6 +24,7 @@ class Index extends CI_Controller {
 		$data = array();
 		$data['floor_params'] = $floor_params;
 		$data['floor_tpls'] = $floor_tpls;
+		$data['floor_params_floor']=json_decode($floor_params,true);
 
 		$this->load->view('mobHomeMNG_cfg',$data);
 	}

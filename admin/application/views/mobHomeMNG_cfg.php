@@ -45,6 +45,39 @@
   <div class="fixed-empty"></div>
 
   <div style="color:blue;">请使用Chrome(谷歌)、Firefox等现代浏览器</div>
+  
+  <div id="floor_deletion" style="width:58%;float:left;">
+    <h1>删除楼层</h1>
+    <span>需要删除第</span>
+    <select id="del_floor_seq">
+      <?php foreach ($floor_params_floor['floors'] as $k => $v) { ?>
+          <option><?php echo $v['floor_id'];?></option>
+      <?php }?>
+    </select>
+    <span>层</span>
+    <input type="button" value="确认删除" id="floor_del_btn" />
+  </div>
+
+
+  <div id="floor_add" style="padding-top:20px;padding-bottom:30px;width:58%;float:left;">
+    <h1>增加楼层</h1>
+    <span>需要在第</span>
+    <select id="add_floor_seq">
+      <option>0</option>
+      <?php foreach ($floor_params_floor['floors'] as $k => $v) { ?>
+          <option><?php echo $v['floor_id'];?></option>
+      <?php }?>
+    </select>
+    <span>层下面新增一层, 使用楼层模板为</span>
+    <select id="add_floor_style">
+      <option value="1" selected="selected" >1 整张大图</option>
+      <option value="2">2 左1右2</option>
+      <option value="3">3 左2右1</option>
+      <option value="4">4 左1右4</option>
+      <option value="5">5 左4右1</option>
+    </select>
+    <input type="button" value="确认增加" id="floor_add_btn" />
+  </div>
   <div id="editor" class="json-editor" style="width:58%;float:left;"></div>
   <div id="viewer" style="width:40%;position:fixed; right:15px;">
       <input id='cfg_preview' type="button" value="保存配置并预览"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -53,7 +86,6 @@
   </div>
   <div class="clear"></div>
   <pre id="json" style="background-color: #eaeaea; width:500px;display:none;"></pre>
-  </div>
 </div>
 <div class="clear"></div>
 <script src="<?php echo base_url('resource/jquery-1.8.3.min.js');?>"></script>
@@ -166,6 +198,67 @@
     // When false is returned, CKFinder will not close automatically.
     return false;
   }
+
+  //删除楼层
+  $('#floor_del_btn').click(function(){
+    var floor2del=$('#del_floor_seq').val()-1;
+    var params_tmp=json_init;
+    if(confirm('请确认需要删除第'+$('#del_floor_seq').val()+'层，删除后无法恢复！')){
+    if(confirm('请再次确认需要删除第'+$('#del_floor_seq').val()+'层，删除后无法恢复！')){
+      //do delte floor opration
+      params_tmp.floors.splice(floor2del,1);
+      //delete params_tmp.floors[floor2del];
+      for(var i=floor2del; i<params_tmp.floors.length; i++){
+        params_tmp.floors[i].floor_id--;
+      }
+      console.log(JSON.stringify(params_tmp,null,4));
+      alert(JSON.stringify(params_tmp,null,4));
+      location.reload();
+      /*
+      $.ajax({
+          url:'index.php?act=mobile&op=setHomePageCFG',
+          type:"post",
+          data:{homepage_json: JSON.stringify(params_tmp)},
+          dataType:"json",
+          success:function(){
+            alert('应用成功');
+            location.reload();
+          }
+      });
+      */
+    }
+    }
+  });
+
+  //增加楼层
+  $('#floor_add_btn').click(function(){
+    var floor2add=$('#add_floor_seq').val();
+    var floor2add_style=$('#add_floor_style').val();
+    var string2add=JSON.stringify(tpls.floor_tpls[floor2add_style-1]);
+    string2add=string2add.replace('{', '{"floor_id":"'+(parseInt(floor2add)+1)+'",');
+    var params_tmp=json_init;
+    if(confirm('请确认需要在第'+$('#add_floor_seq').val()+'层下面增加一层样式为"'+$("#add_floor_style option:selected").text()+'"的新楼层！')){
+      params_tmp.floors.splice(floor2add,0,JSON.parse(string2add));
+      for(var i=parseInt(floor2add)+1; i<params_tmp.floors.length; i++){
+        params_tmp.floors[i].floor_id++;
+      }
+      console.log(JSON.stringify(params_tmp,null,4));
+      alert(JSON.stringify(params_tmp,null,4));
+      location.reload();
+      /*
+      $.ajax({
+          url:'../cell/index.php?act=mobile&op=setHomePageCFG',
+          type:"post",
+          data:{homepage_json: JSON.stringify(params_tmp)},
+          dataType:"json",
+          success:function(){
+            alert('应用成功');
+            location.reload();
+          }
+      });
+      */
+    }
+  });
 </script>
 </body>
 </html>
