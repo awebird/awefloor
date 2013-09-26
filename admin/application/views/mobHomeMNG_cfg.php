@@ -59,7 +59,7 @@
   </div>
 
 
-  <div id="floor_add" style="padding-top:20px;padding-bottom:30px;width:58%;float:left;">
+  <div id="floor_add" style="padding-top:20px;width:58%;float:left;">
     <h1>增加楼层</h1>
     <span>需要在第</span>
     <select id="add_floor_seq">
@@ -78,6 +78,24 @@
     </select>
     <input type="button" value="确认增加" id="floor_add_btn" />
   </div>
+
+  <div id="floor_exchange" style="padding-top:20px;padding-bottom:30px;width:58%;float:left;">
+    <h1>交换楼层</h1>
+    <span>需要互换第</span>
+    <select id="exchange_floor_1">
+      <?php foreach ($floor_params_floor['floors'] as $k => $v) { ?>
+          <option><?php echo $v['floor_id'];?></option>
+      <?php }?>
+    </select>
+    <span>层 和 第</span>
+    <select id="exchange_floor_2">
+      <?php foreach ($floor_params_floor['floors'] as $k => $v) { ?>
+          <option><?php echo $v['floor_id'];?></option>
+      <?php }?>
+    </select>
+    <input type="button" value="确认交换" id="floor_exchange_btn" />
+  </div>
+
   <div id="editor" class="json-editor" style="width:58%;float:left;"></div>
   <div id="viewer" style="width:40%;position:fixed; right:15px;">
       <input id='cfg_preview' type="button" value="保存配置并预览"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -248,6 +266,43 @@
       /*
       $.ajax({
           url:'../cell/index.php?act=mobile&op=setHomePageCFG',
+          type:"post",
+          data:{homepage_json: JSON.stringify(params_tmp)},
+          dataType:"json",
+          success:function(){
+            alert('应用成功');
+            location.reload();
+          }
+      });
+      */
+    }
+  });
+  
+  //互换楼层
+  $('#floor_exchange_btn').click(function(){
+    var floor2exchange1=$('#exchange_floor_1').val();
+    var floor2exchange2=$('#exchange_floor_2').val();
+
+    if(floor2exchange1 == floor2exchange2){
+      alert("请选择不同的楼层才能互换！");
+      return false;
+    }
+    var params_tmp=json_init;
+    if(confirm('请确认需要互换第'+floor2exchange1+'层和第'+floor2exchange2+'层！')){
+      //do delte floor opration
+      params_tmp.floors[floor2exchange2-1].floor_id=floor2exchange1;
+      params_tmp.floors[floor2exchange1-1].floor_id=floor2exchange2;
+      
+      var floor_tmp=params_tmp.floors[floor2exchange2-1];
+      params_tmp.floors[floor2exchange2-1]=params_tmp.floors[floor2exchange1-1];
+      params_tmp.floors[floor2exchange1-1]=floor_tmp;
+
+      console.log(JSON.stringify(params_tmp,null,4));
+      alert(JSON.stringify(params_tmp,null,4));
+      location.reload();
+      /*
+      $.ajax({
+          url:'../cell/index.php?act=mobile&op=setHomePageCFG&mod=cfg',
           type:"post",
           data:{homepage_json: JSON.stringify(params_tmp)},
           dataType:"json",
